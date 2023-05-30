@@ -1,0 +1,10 @@
+---
+- name: converting the template to yml
+  template: 
+    src: "{{ playbook_dir }}/roles/awx_backup_role/templates/backup.yml.j2"
+    dest: "{{ playbook_dir }}/roles/awx_backup_role/files/backup.yml"
+
+- name: Create a backup by applying the backup.yml
+  kubernetes.core.k8s:
+    state: present
+    src: "{{ playbook_dir }}/roles/awx_backup_role/files/backup.yml"

@@ -1,0 +1,4 @@
+---
+- name: Delete backup if it is 7 days old
+  ansible.builtin.command:
+    cmd: kubectl delete awxbackup $(kubectl get awxbackup -n awx | awk 'match($2,/^([7])d/) {print $1}') -n awx
